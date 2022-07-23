@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { View, FlatList, Image, SafeAreaView, TouchableOpacity } from 'react-native';
 import { NavigationStackParam } from '../../routes/types';
 import { getTeams } from '../../services/nbaApi';
-import { Leagues, ResponseTeams, Teams } from '../../services/types';
+import { ResponseTeams, Teams } from '../../services/types';
 import { HomeView } from './view';
 
 type HomeScreenProps = StackScreenProps<NavigationStackParam, 'Home'>;
@@ -17,6 +17,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         getTeams().then((response) => {
             setTeams(response.data);
             setResponseTeams(response.data.response);
+            console.log(response.data.response)
         })
     }, []);
 

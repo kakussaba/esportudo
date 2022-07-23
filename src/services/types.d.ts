@@ -1,3 +1,4 @@
+//Leagues
 export enum League {
     Africa = "africa",
     Orlando = "orlando",
@@ -21,24 +22,11 @@ export enum Division {
     Southwest = "Southwest"
 }
 
-export interface ResponseTeams {
-    id: number;
-    name: string;
-    code: string;
-    nickname?: string;
-    leagues: Leagues[];
-    search: string;
-    city?: string;
-    logo?: string;
-    allStar: boolean;
-    nbaFranchise: boolean;
+export type LeaguesType = {
+    [key in League]: LeaguesContentType
 }
 
-export type Leagues = {
-    [key in League]: LeaguesType
-}
-
-export interface LeaguesType {
+export type LeaguesContentType = {
     conference: Conference.East | Conference.West;
     division: Division.Atlantic | Division.Central | Division.Northwest | Division.Pacific | Division.Southeast | Division.Southwest;
     jersey?: number;
@@ -46,6 +34,7 @@ export interface LeaguesType {
     pos?: string;
 }
 
+//Teams
 export interface Teams {
     get: string;
     parameters?: any;
@@ -54,35 +43,47 @@ export interface Teams {
     response: ResponseTeams[];
 }
 
-export interface Africa {
-    conference: Conference,
-    division: Division
+export interface ResponseTeams {
+    id: number;
+    name: string;
+    code: string;
+    nickname?: string;
+    leagues: LeaguesType[];
+    search: string;
+    city?: string;
+    logo?: string;
+    allStar: boolean;
+    nbaFranchise: boolean;
 }
 
-export interface Orlando {
-    conference: Conference,
-    division: Division
-}
-
-export interface Birth {
+//Players
+export type Birth = {
     date: string;
     country: string;
 }
 
-export interface Nba {
+export type Nba = {
     start: number;
     pro: number;
 }
 
-export interface Height {
+export type Height = {
     feets: string;
     inches: string;
     meters: string;
 }
 
-export interface Weight {
+export type Weight = {
     pounds: string;
     kilograms: string;
+}
+
+export interface Players {
+    get: string;
+    parameters?: any;
+    errors?: any;
+    results: number;
+    response: ResponsePlayers[];
 }
 
 export interface ResponsePlayers {
@@ -95,13 +96,5 @@ export interface ResponsePlayers {
     weight: Weight;
     college: string;
     affiliation: string;
-    leagues: Leagues;
-}
-
-export interface Players {
-    get: string;
-    parameters?: any;
-    errors?: any;
-    results: number;
-    response: ResponsePlayers[];
+    leagues: LeaguesType;
 }
