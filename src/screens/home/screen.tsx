@@ -1,7 +1,6 @@
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack';
+import { StackScreenProps } from '@react-navigation/stack';
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, Image, SafeAreaView, TouchableOpacity } from 'react-native';
+import { View, FlatList, Image, SafeAreaView, TouchableOpacity } from 'react-native';
 import { NavigationStackParam } from '../../routes/types';
 import { getTeams } from '../../services/nbaApi';
 import { Leagues, ResponseTeams, Teams } from '../../services/types';
@@ -23,6 +22,10 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     }, []);
 
     const renderItem = ({ item }) => {
+        const team = {
+            id: item.id,
+            logo: item.logo
+        }
         return (
             <TouchableOpacity
                 style={{
@@ -32,7 +35,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
                     margin: 8,
                     padding: 8
                 }}
-                onPress={() => { navigate('Team', { teamId: item.id, teamLogo: item.logo }) }}
+                onPress={() => { navigate('Team', { team }) }}
             >
                 <Image
                     style={{
