@@ -16,14 +16,9 @@ export const PlayerScreen: React.FC<TeamScreenProps> = ({ navigation, route }) =
 
     return (
         <>
-            <PlayerView/>
-            <View>
-                <Text>{`${player.lastname} ${player.firstname}`}</Text>
-                <Text>{player.birth.country}</Text>
-                <Text>{player.birth.date}</Text>
-                <Text>{player.height.meters}</Text>
-                <Text>{player.weight.kilograms}</Text>
-            </View>
+            <PlayerView
+                player={player}
+            />
         </>
     )
 }

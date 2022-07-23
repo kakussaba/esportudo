@@ -12,7 +12,6 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     const { navigate } = navigation;
     const [teams, setTeams] = useState({} as Teams);
     const [responseTeams, setResponseTeams] = useState({} as ResponseTeams[]);
-    const [leagues, setLeagues] = useState({} as Leagues[]);
 
     useEffect(() => {
         getTeams().then((response) => {
@@ -21,45 +20,12 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         })
     }, []);
 
-    const renderItem = ({ item }) => {
-        const team = {
-            id: item.id,
-            logo: item.logo
-        }
-        return (
-            <TouchableOpacity
-                style={{
-                    flex: 1 / 3,
-                    aspectRatio: 1,
-                    backgroundColor: '#FFFFFF',
-                    margin: 8,
-                    padding: 8
-                }}
-                onPress={() => { navigate('Team', { team }) }}
-            >
-                <Image
-                    style={{
-                        flex: 1
-                    }}
-                    resizeMode={'contain'}
-                    source={{ uri: item.logo }}
-                />
-            </TouchableOpacity>
-        )
-    }
-
     return (
-        <SafeAreaView>
-            <HomeView />
-            <View>
-                <FlatList
-                    data={responseTeams}
-                    keyExtractor={item => item.id.toString()}
-                    numColumns={3}
-                    renderItem={renderItem}
-                >
-                </FlatList>
-            </View>
-        </SafeAreaView>
+        <>
+            <HomeView
+                teams={responseTeams}
+                onPress={(team) => { navigate('Team', { team }) }}
+            />
+        </>
     )
 }

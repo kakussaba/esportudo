@@ -1,4 +1,7 @@
+import { ResponsePlayers } from "../../services/types";
+
 export type Team = {
     id: number;
-    logo: string;
 }
+
+export type Players = ResponsePlayers;

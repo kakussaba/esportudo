@@ -85,7 +85,7 @@ export interface Weight {
     kilograms: string;
 }
 
-export interface PlayersTeam {
+export interface ResponsePlayers {
     id: number;
     firstname: string;
     lastname: string;
@@ -103,5 +103,5 @@ export interface Players {
     parameters?: any;
     errors?: any;
     results: number;
-    response: PlayersTeam[];
+    response: ResponsePlayers[];
 }
