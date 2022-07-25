@@ -1,14 +1,13 @@
 import { StackScreenProps } from '@react-navigation/stack';
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigationStackParam } from '../../routes/types';
 import { getPlayers } from '../../services/nbaApi';
 import { ResponsePlayers } from '../../services/types';
 import { TeamView } from './view';
 import { Team } from './types';
 import { Loading } from '../../global/components/Loading'
-import { Error, ErrorProps } from '../../global/components/Error'
+import { Error, ErrorType } from '../../global/components/Error'
 import { useTheme } from 'styled-components/native';
-import { BottomSheetBackdrop, BottomSheetModal } from '@gorhom/bottom-sheet';
 
 type TeamScreenProps = StackScreenProps<NavigationStackParam, 'Team'>;
 
@@ -18,9 +17,8 @@ export const TeamScreen: React.FC<TeamScreenProps> = ({ navigation, route }) => 
     const [loading, setLoading] = useState(false as boolean);
     const [team, setTeam] = useState(route.params.team as Team);
     const [players, setPlayers] = useState([] as ResponsePlayers[]);
-    const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-    const snapPoints = useMemo(() => ['20%', '30%'], []);
-    const [error, setError] = useState({} as ErrorProps);
+    const [error, setError] = useState({} as ErrorType);
+    const [hasError, setHasError] = useState(false);
 
     const getData = async () => {
         try {
@@ -33,12 +31,14 @@ export const TeamScreen: React.FC<TeamScreenProps> = ({ navigation, route }) => 
                     title: 'No results',
                     text: 'No player found'
                 });
+                setHasError(true);
             }
         } catch (error) {
            setError({
                title: 'An error has occurred',
                text: 'Try again later'
            });
+           setHasError(true);
         } finally {
             setLoading(false);
         }
@@ -47,14 +47,6 @@ export const TeamScreen: React.FC<TeamScreenProps> = ({ navigation, route }) => 
     useEffect(() => {
         getData();
     }, []);
-
-    useEffect(() => {
-        openBottomSheet();
-    }, [error])
-
-    const openBottomSheet = useCallback(() => {
-        bottomSheetModalRef.current?.present();
-    }, [bottomSheetModalRef]);
 
     if (loading) {
         return <Loading color={colors.BLACK} />;
@@ -67,14 +59,7 @@ export const TeamScreen: React.FC<TeamScreenProps> = ({ navigation, route }) => 
                 players={players}
                 onPress={(team, player, color) => { navigate('Player', { team: team, player: player, color: color }) }}
             />
-            <BottomSheetModal
-                ref={bottomSheetModalRef}
-                index={1}
-                snapPoints={snapPoints}
-                backdropComponent={BottomSheetBackdrop}
-            >
-                <Error title={error.title} text={error.text} />
-            </BottomSheetModal>
+           <Error error={error} hasError={hasError} />
         </>
     );
 }
