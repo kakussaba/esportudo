@@ -1,14 +1,14 @@
 import React from 'react';
 import * as S from './style';
 
-export enum TypeUnit {
+export enum UnitType {
     'meters' = "m",
     'kilograms' = "kg"
 }
 type TableItemProps = {
     title: string;
     text: string;
-    type?: TypeUnit;
+    type?: UnitType;
 };
 
 export const TableItem: React.FC<TableItemProps> = ({

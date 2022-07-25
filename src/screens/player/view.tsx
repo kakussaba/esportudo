@@ -1,5 +1,5 @@
 import React from 'react';
-import { TableItem, TypeUnit } from '../../global/components/TableItem';
+import { TableItem, UnitType } from '../../global/components/TableItem';
 import { parseDate } from '../../global/utils/utils';
 import { Team } from '../team/types';
 import * as Type from './types';
@@ -30,8 +30,8 @@ export const PlayerView: React.FC<PlayerViewProps> = ({
             <S.Name>{`${player.firstname} ${player.lastname}`}</S.Name>
             <S.Table>
                 <S.TableRow>
-                    <TableItem title="Height" text={player.height?.meters || "-"} type={TypeUnit.meters} />
-                    <TableItem title="Weight" text={player.weight?.kilograms || "-"} type={TypeUnit.kilograms}/>
+                    <TableItem title="Height" text={player.height?.meters || "-"} type={UnitType.meters} />
+                    <TableItem title="Weight" text={player.weight?.kilograms || "-"} type={UnitType.kilograms}/>
                 </S.TableRow>
                 <S.TableRow>
                     <TableItem title="Country" text={player.birth.country || "-"} />
