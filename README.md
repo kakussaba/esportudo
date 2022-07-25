@@ -17,11 +17,11 @@ O projeto foi criado para apresentar um pouco do meu conhecimento sobre desenvol
 ## :arrow_forward: Rodar o Projeto
 
 - Clone o projeto em sua maquina;
-- Instale as dependências do package.json com "yarn install || npm i"
-- Rode na raiz do projeto apenas para ios "cd ios"
-- Rode na raiz do projeto apenas para ios "pod install"
-- Para build no ios "yarn run ios"
-- Para build no android "yarn run android"
+- Instale as dependências do package.json com "yarn install || npm i";
+- Rode na raiz do projeto apenas para ios "cd ios";
+- Rode na raiz do projeto apenas para ios "pod install";
+- Para build no ios "yarn run ios";
+- Para build no android "yarn run android";
 
 ---
 

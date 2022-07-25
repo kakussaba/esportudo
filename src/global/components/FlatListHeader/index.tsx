@@ -2,7 +2,7 @@ import React from 'react';
 import * as S from './style';
 
 type FlatListHeaderProps = {
-    src: string | '';
+    src: any;
     queryText: string;
     onChangeText: (text: string) => void;
     backgroundColor?: string;
@@ -16,10 +16,10 @@ export const FlatListHeader: React.FC<FlatListHeaderProps> = ({
 }) => {
     return (
         <S.Container>
-            {/*<S.Image
+            <S.Image
                 resizeMode={'contain'}
-                source={require(src)}
-            />*/}
+                source={src}
+            />
             <S.ContainerInput backgroundColor={backgroundColor}>
                 <S.TextInput
                     autoCorrect={false}

@@ -20,7 +20,7 @@ export const TeamView: React.FC<TeamViewProps> = ({
     players,
     onPress,
 }) => {
-    const [queryText, setQueryText] = useState("" as string);
+    const [queryText, setQueryText] = useState("");
 
     const color = getMainColor(team.code) || { hex: '#CCCCCC' };
 
@@ -39,7 +39,7 @@ export const TeamView: React.FC<TeamViewProps> = ({
         return (
             <FlatListHeader
                 queryText={queryText}
-                src={team.logo}
+                src={{uri: team.logo}}
                 onChangeText={(text) => setQueryText(text)}
                 backgroundColor={color.hex}
             />

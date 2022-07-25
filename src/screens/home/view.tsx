@@ -17,7 +17,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
     onPress
 }) => {
     const { colors } = useTheme();
-    const [queryText, setQueryText] = useState("" as string);
+    const [queryText, setQueryText] = useState("");
 
     const renderItem = ({ item }) => {
         return (
@@ -31,7 +31,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
     const renderHeader = () => {
         return (
             <FlatListHeader
-                src="./../../global/assets/images/nba-logo.png"
+                src={require("./../../global/assets/images/nba-logo.png")}
                 queryText={queryText}
                 onChangeText={(text) => setQueryText(text)}
                 backgroundColor={colors.PRIMARY}

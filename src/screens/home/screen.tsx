@@ -4,7 +4,7 @@ import { useTheme } from 'styled-components/native';
 import { Loading } from '../../global/components/Loading';
 import { NavigationStackParam } from '../../routes/types';
 import { getTeams } from '../../services/nbaApi';
-import { ResponseTeams, Teams } from '../../services/types';
+import { ResponseTeams } from '../../services/types';
 import { HomeView } from './view';
 
 type HomeScreenProps = StackScreenProps<NavigationStackParam, 'Home'>;
@@ -13,31 +13,32 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     const { navigate } = navigation;
     const { colors } = useTheme();
     const [loading, setLoading] = useState(false as boolean);
-    const [teams, setTeams] = useState({} as Teams);
-    const [responseTeams, setResponseTeams] = useState([] as ResponseTeams[]);
+    const [teams, setTeams] = useState({} as ResponseTeams[]);
+
+    const getData = async () => {
+        try {
+            setLoading(true);
+            const { data } = await getTeams();
+            setTeams(data.response);
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
+    }
 
     useEffect(() => {
-        setLoading(true);
-        getTeams().then(response => {
-            setTeams(response.data);
-            setResponseTeams(response.data.response);
-            setLoading(false)
-        }).catch(err => {
-            setLoading(false);
-            console.log(err);
-        })
+        getData();
     }, []);
 
+    if (loading) {
+        return <Loading color={colors.PRIMARY} />;
+    }
+
     return (
-        <>
-            {loading ? (
-                <Loading color={colors.PRIMARY} />
-            ) : (
-                <HomeView
-                    teams={responseTeams}
-                    onPress={(team) => { navigate('Team', { team }) }}
-                />
-            )}
-        </>
+        <HomeView
+            teams={teams}
+            onPress={(team) => { navigate('Team', { team }) }}
+        />
     )
 }

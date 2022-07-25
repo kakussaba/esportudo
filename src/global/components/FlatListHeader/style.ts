@@ -10,8 +10,9 @@ export const Container = styled.View`
 `;
 
 export const Image = styled.Image`
-    height: 200px;
-    margin-bottom 16px;
+    height: 100px;
+    width: 100px;
+    margin: 8px 0;
 `;
 
 export const ContainerInput = styled.View<ContainerInputProps>`
