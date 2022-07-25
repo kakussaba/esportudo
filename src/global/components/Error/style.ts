@@ -4,15 +4,15 @@ export const Container = styled.SafeAreaView`
     flex: 1;
     background-color: ${({ theme }) => theme.colors.WHITE};
     align-items: center;
-    margin-top: 32px;
+    margin-top: ${({ theme }) => theme.margin.LG};
 `;
 
 export const Title = styled.Text`
     font-weight: bold;
-    margin: 16px 0;
-    font-size: 18px;
+    margin: ${({ theme }) => theme.margin.SM} 0;
+    font-size: ${({ theme }) => theme.fontSize.XMD} ;
 `;
 
 export const Text = styled.Text`
-    font-size: 16px;
+    font-size:  ${({ theme }) => theme.fontSize.SM};
 `;

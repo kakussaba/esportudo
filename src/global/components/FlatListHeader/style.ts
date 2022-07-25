@@ -5,25 +5,25 @@ type ContainerInputProps = {
 }
 
 export const Container = styled.View`
-    padding: 0 16px;
+    padding: 0 ${({ theme }) => theme.padding.SM};
     align-items: center;
 `;
 
 export const Image = styled.Image`
     height: 100px;
     width: 100px;
-    margin: 8px 0;
+    margin: ${({ theme }) => theme.margin.XXS} 0;
 `;
 
 export const ContainerInput = styled.View<ContainerInputProps>`
     background-color: ${props => props.backgroundColor};
     width: 100%;
-    padding: 32px;
+    padding: ${({ theme }) => theme.padding.LG};
 `;
 
 export const TextInput = styled.TextInput`
     backgroundColor:  ${({ theme }) => theme.colors.WHITE};
-    padding: 16px;
-    fontSize: 18px;
+    padding: ${({ theme }) => theme.padding.SM};
+    font-size: ${({ theme }) => theme.fontSize.XMD};
     color: ${({ theme }) => theme.colors.BLACK};
 `;

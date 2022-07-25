@@ -5,8 +5,8 @@ export const Button = styled.TouchableOpacity`
     aspectRatio: 1;
     border-width: 1px;
     border-color: ${({ theme }) => theme.colors.WHITE};
-    margin: 8px;
-    padding: 8px;
+    margin: ${({ theme }) => theme.margin.XXS};
+    padding: ${({ theme }) => theme.padding.XXS};
 `;
 
 export const Logo = styled.Image`

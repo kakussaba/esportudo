@@ -8,7 +8,7 @@ export const Container = styled.View<ContainerProps>`
     background-color: ${(props) => props.backgroundColor }
     flex: 1;
     align-items: center;
-    padding: 32px;
+    padding: ${({ theme }) => theme.padding.LG};
 `;
 
 export const Logo = styled.Image`
@@ -17,25 +17,25 @@ export const Logo = styled.Image`
 `;
 
 export const ContainerTitle = styled.View`
-    margin: 16px 0;
+    margin: ${({ theme }) => theme.margin.SM} 0;
 `;
 
 export const Title = styled.Text`
     color: ${({ theme }) => theme.colors.WHITE};
-    font-size: 16px;
+    font-size:  ${({ theme }) => theme.fontSize.SM};
     font-weight: bold;
 `;
 
 export const Name = styled.Text`
     color: ${({ theme }) => theme.colors.WHITE};
-    font-size: 26px;
+    font-size:  ${({ theme }) => theme.fontSize.MD};
     font-weight: bold;
 `;
 
 export const Table = styled.View`
     flex-direction: column;
     width: 100%;
-    margin: 16px 0;
+    margin: ${({ theme }) => theme.margin.SM} 0;
 `;
 
 export const TableRow = styled.View`
