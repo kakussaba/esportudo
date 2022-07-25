@@ -1,10 +1,10 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import React, { useEffect, useState } from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
 import { NavigationStackParam } from '../../routes/types';
 import { PlayerView } from './view';
 import { ColorTeam, Player } from './types';
 import { Team } from '../team/types';
+import { Loading } from '../../global/components/Loading';
 
 type TeamScreenProps = StackScreenProps<NavigationStackParam, 'Player'>;
 
@@ -19,14 +19,15 @@ export const PlayerScreen: React.FC<TeamScreenProps> = ({ navigation, route }) =
 
     return (
         <>
-            {loading ? (<View style={{ flex: 1, justifyContent: 'center' }}>
-                <ActivityIndicator size="large" color="#1d428a" />
-            </View>) : (
+            {loading ? (
+                <Loading />
+            ) : (
                 <PlayerView
                     team={team}
                     player={player}
                     color={color}
-                />)}
+                />
+            )}
         </>
     )
 }

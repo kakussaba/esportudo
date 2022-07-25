@@ -1,6 +1,7 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import React, { useEffect, useState } from 'react';
-import { View, FlatList, Image, SafeAreaView, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { useTheme } from 'styled-components/native';
+import { Loading } from '../../global/components/Loading';
 import { NavigationStackParam } from '../../routes/types';
 import { getTeams } from '../../services/nbaApi';
 import { ResponseTeams, Teams } from '../../services/types';
@@ -10,6 +11,7 @@ type HomeScreenProps = StackScreenProps<NavigationStackParam, 'Home'>;
 
 export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     const { navigate } = navigation;
+    const { colors } = useTheme();
     const [loading, setLoading] = useState(false as boolean);
     const [teams, setTeams] = useState({} as Teams);
     const [responseTeams, setResponseTeams] = useState([] as ResponseTeams[]);
@@ -28,12 +30,14 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
 
     return (
         <>
-            {loading ? (<View style={{ flex: 1, justifyContent: 'center' }}>
-                <ActivityIndicator size="large" color="#1d428a" />
-            </View>) : (<HomeView
-                teams={responseTeams}
-                onPress={(team) => { navigate('Team', { team }) }}
-            />)}
+            {loading ? (
+                <Loading color={colors.PRIMARY} />
+            ) : (
+                <HomeView
+                    teams={responseTeams}
+                    onPress={(team) => { navigate('Team', { team }) }}
+                />
+            )}
         </>
     )
 }

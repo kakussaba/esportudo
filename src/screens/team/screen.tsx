@@ -5,12 +5,14 @@ import { getPlayers } from '../../services/nbaApi';
 import { Players, ResponsePlayers } from '../../services/types';
 import { TeamView } from './view';
 import { Team } from './types';
-import { ActivityIndicator, View } from 'react-native';
+import { Loading } from '../../global/components/Loading'
+import { useTheme } from 'styled-components/native';
 
 type TeamScreenProps = StackScreenProps<NavigationStackParam, 'Team'>;
 
 export const TeamScreen: React.FC<TeamScreenProps> = ({ navigation, route }) => {
     const { navigate } = navigation;
+    const { colors } = useTheme();
     const [loading, setLoading] = useState(false as boolean);
     const [team, setTeam] = useState(route.params.team as Team);
     const [players, setPlayers] = useState({} as Players);
@@ -30,14 +32,15 @@ export const TeamScreen: React.FC<TeamScreenProps> = ({ navigation, route }) => 
 
     return (
         <>
-            {loading ? (<View style={{ flex: 1, justifyContent: 'center' }}>
-                <ActivityIndicator size="large" color="#BBBBBB" />
-            </View>) : (
+            {loading ? (
+                <Loading color={colors.BLACK} />
+            ) : (
                 <TeamView
                     team={team}
                     players={responsePlayers}
                     onPress={(team, player, color) => { navigate('Player', { team: team, player: player, color: color }) }}
-                />)}
+                />
+            )}
         </>
     )
 }

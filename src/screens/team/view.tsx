@@ -1,9 +1,13 @@
 import { getMainColor } from 'nba-color';
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Image, FlatList, SafeAreaView, TextInput } from 'react-native';
+import { FlatList } from 'react-native';
 import { ColorTeam, Player } from '../player/types';
 import * as Type from './types';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { FlatListHeader } from '../../global/components/FlatListHeader';
+import { FlatListItem } from '../../global/components/FlatListItem';
+import * as S from './style';
+import { EmptyList } from '../../global/components/EmptyList';
+import { FlatListSeparator } from '../../global/components/FlatListSeparator';
 
 export type TeamViewProps = {
     team: Type.Team;
@@ -22,40 +26,23 @@ export const TeamView: React.FC<TeamViewProps> = ({
 
     const renderItem = ({ item }) => {
         return (
-            <TouchableOpacity
-                style={{
-                    backgroundColor: '#FFFFFF',
-                }}
+            <FlatListItem
+                item={item}
+                team={team}
+                color={color}
                 onPress={() => onPress(team, item, color)}
-            >
-                <View style={{ alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 16, paddingHorizontal: 32 }}>
-                    <Text style={{ fontSize: 18, marginVertical: 8 }}>{`${item.firstname} ${item.lastname}`}</Text>
-                    <Icon name="chevron-right" size={20} />
-                </View>
-            </TouchableOpacity>
+            />
         )
     }
 
     const renderHeader = () => {
         return (
-            <View style={{ padding: 32, alignItems: 'center', flex: 1, backgroundColor: color?.hex }}>
-                {team.logo && (<Image
-                    style={{
-                        height: 100,
-                        width: 100,
-                        marginBottom: 16
-                    }}
-                    resizeMode={'contain'}
-                    source={{ uri: team.logo }}
-                />)}
-                <TextInput
-                    autoCorrect={false}
-                    placeholder="Insert a player name"
-                    style={{ backgroundColor: '#FFFFFF', padding: 16, fontSize: 18, color: '#AAAAAA', width: '100%' }}
-                    onChangeText={(text) => setQueryText(text)}
-                    value={queryText}
-                />
-            </View>
+            <FlatListHeader
+                queryText={queryText}
+                src={team.logo}
+                onChangeText={(text) => setQueryText(text)}
+                backgroundColor={color.hex}
+            />
         );
     }
 
@@ -66,15 +53,18 @@ export const TeamView: React.FC<TeamViewProps> = ({
         : players;
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
-            <FlatList
-                data={searchFilteredData}
-                keyExtractor={item => item.id.toString()}
-                renderItem={renderItem}
-                ListHeaderComponent={renderHeader}
-                ItemSeparatorComponent={() => (<View style={{ backgroundColor: "#EEEEEE", height: 2 }}></View>)}
-                style={{ backgroundColor: '#FFFFFF' }}
-            />
-        </SafeAreaView>
+        <S.Container>
+            {players.length > 0 ? (
+                <FlatList
+                    data={searchFilteredData}
+                    keyExtractor={item => item.id.toString()}
+                    renderItem={renderItem}
+                    ListHeaderComponent={renderHeader}
+                    ItemSeparatorComponent={() => (<FlatListSeparator />)}
+                />
+            ) : (
+                <EmptyList text="Players not found" />
+            )}
+        </S.Container>
     )
 }
