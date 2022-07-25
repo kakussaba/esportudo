@@ -4,7 +4,6 @@ export default {
 
         //B
         BLACK: '#000000',
-
         //W
         WHITE: '#FFFFFF',
 
