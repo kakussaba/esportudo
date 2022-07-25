@@ -1,4 +1,4 @@
-import { BottomSheetModal } from '@gorhom/bottom-sheet';
+import { BottomSheetBackdrop, BottomSheetModal } from '@gorhom/bottom-sheet';
 import { StackScreenProps } from '@react-navigation/stack';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Text, View } from 'react-native';
@@ -18,7 +18,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     const bottomSheetModalRef = useRef<BottomSheetModal>(null);
     const [loading, setLoading] = useState(false as boolean);
     const [teams, setTeams] = useState([] as ResponseTeams[]);
-    const snapPoints = useMemo(() => ['40%', '50%'], []);
+    const snapPoints = useMemo(() => ['20%', '30%'], []);
     const [error, setError] = useState({} as ErrorProps);
 
     const getData = async () => {
@@ -46,6 +46,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
 
     useEffect(() => {
         getData();
+        openBottomSheet();
     }, []);
 
     useEffect(() => {
@@ -70,6 +71,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
                 ref={bottomSheetModalRef}
                 index={1}
                 snapPoints={snapPoints}
+                backdropComponent={BottomSheetBackdrop}
             >
                 <Error title={error.title} text={error.text} />
             </BottomSheetModal>

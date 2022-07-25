@@ -19,7 +19,7 @@ export const TeamScreen: React.FC<TeamScreenProps> = ({ navigation, route }) => 
     const [team, setTeam] = useState(route.params.team as Team);
     const [players, setPlayers] = useState([] as ResponsePlayers[]);
     const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-    const snapPoints = useMemo(() => ['25%', '50%'], []);
+    const snapPoints = useMemo(() => ['20%', '30%'], []);
     const [error, setError] = useState({} as ErrorProps);
 
     const getData = async () => {

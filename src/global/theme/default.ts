@@ -8,6 +8,9 @@ export default {
         WHITE: '#FFFFFF',
 
         //G
-        GRAY: '#EEEEEE'
+        GRAY: '#EEEEEE',
+
+        //O
+        ORANGE: '#FFA500'
     }
 }
