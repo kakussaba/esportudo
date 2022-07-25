@@ -18,5 +18,5 @@ export const PlayerScreen: React.FC<TeamScreenProps> = ({ route }) => {
             player={player}
             color={color}
         />
-    )
+    );
 }

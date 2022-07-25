@@ -6,7 +6,6 @@ import * as Type from './types';
 import { FlatListHeader } from '../../global/components/FlatListHeader';
 import { FlatListItem } from '../../global/components/FlatListItem';
 import * as S from './style';
-import { EmptyList } from '../../global/components/EmptyList';
 import { FlatListSeparator } from '../../global/components/FlatListSeparator';
 
 export type TeamViewProps = {
@@ -39,7 +38,7 @@ export const TeamView: React.FC<TeamViewProps> = ({
         return (
             <FlatListHeader
                 queryText={queryText}
-                src={{uri: team.logo}}
+                src={{ uri: team.logo }}
                 onChangeText={(text) => setQueryText(text)}
                 backgroundColor={color.hex}
             />
@@ -54,17 +53,13 @@ export const TeamView: React.FC<TeamViewProps> = ({
 
     return (
         <S.Container>
-            {players.length > 0 ? (
-                <FlatList
-                    data={searchFilteredData}
-                    keyExtractor={item => item.id.toString()}
-                    renderItem={renderItem}
-                    ListHeaderComponent={renderHeader}
-                    ItemSeparatorComponent={() => (<FlatListSeparator />)}
-                />
-            ) : (
-                <EmptyList text="Players not found" />
-            )}
+            <FlatList
+                data={searchFilteredData}
+                keyExtractor={item => item.id.toString()}
+                renderItem={renderItem}
+                ListHeaderComponent={renderHeader}
+                ItemSeparatorComponent={() => (<FlatListSeparator />)}
+            />
         </S.Container>
     )
 }
