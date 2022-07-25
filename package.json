@@ -21,6 +21,7 @@
     "nba-color": "^1.4.1",
     "react": "18.0.0",
     "react-native": "0.69.2",
+    "react-native-bootsplash": "^4.2.3",
     "react-native-gesture-handler": "^2.5.0",
     "react-native-reanimated": "^2.9.1",
     "react-native-responsive-fontsize": "^0.5.1",
