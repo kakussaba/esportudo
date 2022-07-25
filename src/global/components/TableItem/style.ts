@@ -7,13 +7,13 @@ export const Container = styled.View`
 `;
 
 export const Title = styled.Text`
-    color: ${({ theme }) => theme.colors.WHITE};
+    color: ${({ theme }) => theme.colors.BLACK};
     font-size:  ${({ theme }) => theme.fontSize.SM};
     font-weight: bold;
     margin-bottom: ${({ theme }) => theme.margin.XXXS};
 `;
 
 export const Text = styled.Text`
-    color: ${({ theme }) => theme.colors.WHITE};
+    color: ${({ theme }) => theme.colors.BLACK};
     font-size:  ${({ theme }) => theme.fontSize.XMD};
 `;

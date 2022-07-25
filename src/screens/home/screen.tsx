@@ -7,6 +7,7 @@ import { getTeams } from '../../services/nbaApi';
 import { ResponseTeams } from '../../services/types';
 import { HomeView } from './view';
 import { Error, ErrorType } from '../../global/components/Error'
+import * as S from './style';
 
 type HomeScreenProps = StackScreenProps<NavigationStackParam, 'Home'>;
 
@@ -17,10 +18,11 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     const [teams, setTeams] = useState([] as ResponseTeams[]);
     const [error, setError] = useState({} as ErrorType);
     const [hasError, setHasError] = useState(false);
+    const [refreshing, setRefreshing] = useState(false);
 
-    const getData = async () => {
+    const getData = async (isLoading) => {
         try {
-            setLoading(true);
+            isLoading ? setLoading(true) : setRefreshing(true);
             const { data } = await getTeams();
             setTeams(data.response);
 
@@ -39,12 +41,16 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
             });
             setHasError(true);
         } finally {
-            setLoading(false);
+            isLoading ? setLoading(false) : setRefreshing(false);
         }
     }
 
+    const onRefresh = React.useCallback(() => {
+        getData(false);
+    }, []);
+
     useEffect(() => {
-        getData();
+        getData(true);
     }, []);
 
     if (loading) {
@@ -52,12 +58,14 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     }
 
     return (
-        <>
+        <S.Container>
             <HomeView
                 teams={teams}
                 onPress={(team) => { navigate('Team', { team }) }}
+                onRefresh={onRefresh}
+                refreshing={refreshing}
             />
             <Error error={error} hasError={hasError} />
-        </>
+        </S.Container>
     )
 }

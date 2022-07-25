@@ -1,24 +1,24 @@
 import styled from 'styled-components/native';
 
-type ContainerInputProps = {
+type ContainerProps = {
     backgroundColor: string;
 }
 
-export const Container = styled.View`
-    padding: 0 ${({ theme }) => theme.padding.SM};
+export const Container = styled.View<ContainerProps>`
+    background-color: ${props => props.backgroundColor};
+    padding: ${({ theme }) => theme.padding.SM} 0;
     align-items: center;
 `;
 
 export const Image = styled.Image`
-    height: 100px;
-    width: 100px;
+    width: 100%;
+    height: 150px;
     margin: ${({ theme }) => theme.margin.XXS} 0;
 `;
 
-export const ContainerInput = styled.View<ContainerInputProps>`
-    background-color: ${props => props.backgroundColor};
+export const ContainerInput = styled.View`
     width: 100%;
-    padding: ${({ theme }) => theme.padding.LG};
+    padding: ${({ theme }) => theme.padding.SM};
 `;
 
 export const TextInput = styled.TextInput`

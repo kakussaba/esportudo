@@ -29,6 +29,8 @@ export default {
 
         //B
         BLACK: '#000000',
+        BRIGHT_GRAY: '#EAEAEA',
+
         //W
         WHITE: '#FFFFFF',
 

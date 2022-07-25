@@ -1,20 +1,23 @@
 import React, { useState } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, RefreshControl } from 'react-native';
 import { FlatListHeader } from '../../global/components/FlatListHeader';
 import { Team } from '../team/types';
 import * as Type from './types';
-import * as S from './style';
 import { useTheme } from 'styled-components/native';
 import { FlatListLogoItem } from '../../global/components/FlatListLogoItem';
 
 export type HomeViewProps = {
     teams: Type.Teams[];
     onPress: (team: Team) => void;
+    refreshing: boolean;
+    onRefresh: () => void;
 };
 
 export const HomeView: React.FC<HomeViewProps> = ({
     teams,
-    onPress
+    onPress,
+    refreshing,
+    onRefresh
 }) => {
     const { colors } = useTheme();
     const [queryText, setQueryText] = useState("");
@@ -35,6 +38,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 queryText={queryText}
                 onChangeText={(text) => setQueryText(text)}
                 backgroundColor={colors.PRIMARY}
+                placeholder="Insert a team name"
             />
         );
     }
@@ -47,14 +51,18 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
 
     return (
-        <S.Container>
-            <FlatList
-                data={searchFilteredData}
-                keyExtractor={item => item.id.toString()}
-                numColumns={3}
-                renderItem={renderItem}
-                ListHeaderComponent={renderHeader}
-            />
-        </S.Container>
+        <FlatList
+            data={searchFilteredData}
+            keyExtractor={item => item.id.toString()}
+            numColumns={3}
+            renderItem={renderItem}
+            ListHeaderComponent={renderHeader}
+            refreshControl={
+                <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
+                />
+            }
+        />
     )
 }

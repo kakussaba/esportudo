@@ -19,10 +19,11 @@ export const TeamScreen: React.FC<TeamScreenProps> = ({ navigation, route }) => 
     const [players, setPlayers] = useState([] as ResponsePlayers[]);
     const [error, setError] = useState({} as ErrorType);
     const [hasError, setHasError] = useState(false);
+    const [refreshing, setRefreshing] = useState(false);
 
-    const getData = async () => {
+    const getData = async (isLoading) => {
         try {
-            setLoading(true);
+            isLoading ? setLoading(true) : setRefreshing(true);
             const { data } = await getPlayers(team.id);
             setPlayers(data.response);
 
@@ -40,12 +41,16 @@ export const TeamScreen: React.FC<TeamScreenProps> = ({ navigation, route }) => 
            });
            setHasError(true);
         } finally {
-            setLoading(false);
+            isLoading ? setLoading(false) : setRefreshing(false);
         }
     }
 
+    const onRefresh = React.useCallback(() => {
+        getData(false);
+    }, []);
+
     useEffect(() => {
-        getData();
+        getData(true);
     }, []);
 
     if (loading) {
@@ -58,6 +63,8 @@ export const TeamScreen: React.FC<TeamScreenProps> = ({ navigation, route }) => 
                 team={team}
                 players={players}
                 onPress={(team, player, color) => { navigate('Player', { team: team, player: player, color: color }) }}
+                refreshing={refreshing}
+                onRefresh={onRefresh}
             />
            <Error error={error} hasError={hasError} />
         </>

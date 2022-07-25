@@ -7,8 +7,13 @@ type ContainerProps = {
 export const Container = styled.View<ContainerProps>`
     background-color: ${(props) => props.backgroundColor }
     flex: 1;
-    align-items: center;
+    flex-direction: column;
+`;
+
+export const ContainerHeader = styled.View`
+    flex: 0.4;
     padding: ${({ theme }) => theme.padding.LG};
+    align-items: center;
 `;
 
 export const Logo = styled.Image`
@@ -33,9 +38,11 @@ export const Name = styled.Text`
 `;
 
 export const Table = styled.View`
+    flex: 0.6;
     flex-direction: column;
+    background-color:${({ theme }) => theme.colors.WHITE};
     width: 100%;
-    margin: ${({ theme }) => theme.margin.SM} 0;
+    padding: ${({ theme }) => theme.padding.LG};
 `;
 
 export const TableRow = styled.View`

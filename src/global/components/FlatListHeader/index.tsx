@@ -6,24 +6,26 @@ type FlatListHeaderProps = {
     queryText: string;
     onChangeText: (text: string) => void;
     backgroundColor?: string;
+    placeholder: string;
 };
 
 export const FlatListHeader: React.FC<FlatListHeaderProps> = ({
     src,
     queryText,
     onChangeText,
-    backgroundColor
+    backgroundColor,
+    placeholder
 }) => {
     return (
-        <S.Container>
+        <S.Container backgroundColor={backgroundColor}>
             <S.Image
                 resizeMode={'contain'}
                 source={src}
             />
-            <S.ContainerInput backgroundColor={backgroundColor}>
+            <S.ContainerInput>
                 <S.TextInput
                     autoCorrect={false}
-                    placeholder="Insert a team name"
+                    placeholder={placeholder}
                     onChangeText={(text) => onChangeText(text)}
                     value={queryText}
                     autoFocus

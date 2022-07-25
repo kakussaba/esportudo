@@ -1,6 +1,6 @@
 import { getMainColor } from 'nba-color';
 import React, { useState } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, RefreshControl } from 'react-native';
 import { ColorTeam, Player } from '../player/types';
 import * as Type from './types';
 import { FlatListHeader } from '../../global/components/FlatListHeader';
@@ -12,12 +12,16 @@ export type TeamViewProps = {
     team: Type.Team;
     players: Type.Players[];
     onPress: (team: Type.Team, player: Player, color: ColorTeam) => void;
+    refreshing: boolean;
+    onRefresh: () => void;
 };
 
 export const TeamView: React.FC<TeamViewProps> = ({
     team,
     players,
     onPress,
+    refreshing,
+    onRefresh
 }) => {
     const [queryText, setQueryText] = useState("");
 
@@ -41,6 +45,7 @@ export const TeamView: React.FC<TeamViewProps> = ({
                 src={{ uri: team.logo }}
                 onChangeText={(text) => setQueryText(text)}
                 backgroundColor={color.hex}
+                placeholder="Insert a player name"
             />
         );
     }
@@ -59,6 +64,12 @@ export const TeamView: React.FC<TeamViewProps> = ({
                 renderItem={renderItem}
                 ListHeaderComponent={renderHeader}
                 ItemSeparatorComponent={() => (<FlatListSeparator />)}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={refreshing}
+                        onRefresh={onRefresh}
+                    />
+                }
             />
         </S.Container>
     )

@@ -18,20 +18,22 @@ export const PlayerView: React.FC<PlayerViewProps> = ({
 }) => {
     return (
         <S.Container backgroundColor={color.hex}>
-            {team.logo && (
-                <S.Logo
-                    resizeMode={'contain'}
-                    source={{ uri: team.logo }}
-                />
-            )}
-            <S.ContainerTitle>
-                <S.Title>{`${team.name} | #${player.nba.pro}`}</S.Title>
-            </S.ContainerTitle>
-            <S.Name>{`${player.firstname} ${player.lastname}`}</S.Name>
+            <S.ContainerHeader>
+                {team.logo && (
+                    <S.Logo
+                        resizeMode={'contain'}
+                        source={{ uri: team.logo }}
+                    />
+                )}
+                <S.ContainerTitle>
+                    <S.Title>{`${team.name} | #${player.nba.pro}`}</S.Title>
+                </S.ContainerTitle>
+                <S.Name>{`${player.firstname} ${player.lastname}`}</S.Name>
+            </S.ContainerHeader>
             <S.Table>
                 <S.TableRow>
                     <TableItem title="Height" text={player.height?.meters || "-"} type={UnitType.meters} />
-                    <TableItem title="Weight" text={player.weight?.kilograms || "-"} type={UnitType.kilograms}/>
+                    <TableItem title="Weight" text={player.weight?.kilograms || "-"} type={UnitType.kilograms} />
                 </S.TableRow>
                 <S.TableRow>
                     <TableItem title="Country" text={player.birth.country || "-"} />
