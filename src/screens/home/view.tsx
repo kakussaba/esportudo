@@ -63,6 +63,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                     onRefresh={onRefresh}
                 />
             }
+            showsVerticalScrollIndicator={false}
         />
     )
 }
