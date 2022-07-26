@@ -11,13 +11,15 @@ export type HomeViewProps = {
     onPress: (team: Team) => void;
     refreshing: boolean;
     onRefresh: () => void;
+    hasError: boolean;
 };
 
 export const HomeView: React.FC<HomeViewProps> = ({
     teams,
     onPress,
     refreshing,
-    onRefresh
+    onRefresh,
+    hasError
 }) => {
     const { colors } = useTheme();
     const [queryText, setQueryText] = useState("");
@@ -39,6 +41,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 onChangeText={(text) => setQueryText(text)}
                 backgroundColor={colors.PRIMARY}
                 placeholder="Insert a team name"
+                hasError={hasError}
             />
         );
     }

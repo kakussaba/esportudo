@@ -14,6 +14,7 @@ export type TeamViewProps = {
     onPress: (team: Type.Team, player: Player, color: ColorTeam) => void;
     refreshing: boolean;
     onRefresh: () => void;
+    hasError: boolean;
 };
 
 export const TeamView: React.FC<TeamViewProps> = ({
@@ -21,7 +22,8 @@ export const TeamView: React.FC<TeamViewProps> = ({
     players,
     onPress,
     refreshing,
-    onRefresh
+    onRefresh,
+    hasError
 }) => {
     const [queryText, setQueryText] = useState("");
 
@@ -46,6 +48,7 @@ export const TeamView: React.FC<TeamViewProps> = ({
                 onChangeText={(text) => setQueryText(text)}
                 backgroundColor={color.hex}
                 placeholder="Insert a player name"
+                hasError={hasError}
             />
         );
     }

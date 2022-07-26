@@ -7,6 +7,7 @@ type FlatListHeaderProps = {
     onChangeText: (text: string) => void;
     backgroundColor?: string;
     placeholder: string;
+    hasError: boolean;
 };
 
 export const FlatListHeader: React.FC<FlatListHeaderProps> = ({
@@ -14,7 +15,8 @@ export const FlatListHeader: React.FC<FlatListHeaderProps> = ({
     queryText,
     onChangeText,
     backgroundColor,
-    placeholder
+    placeholder,
+    hasError
 }) => {
     return (
         <S.Container backgroundColor={backgroundColor}>
@@ -28,7 +30,7 @@ export const FlatListHeader: React.FC<FlatListHeaderProps> = ({
                     placeholder={placeholder}
                     onChangeText={(text) => onChangeText(text)}
                     value={queryText}
-                    autoFocus
+                    autoFocus={!hasError}
                 />
             </S.ContainerInput>
         </S.Container>

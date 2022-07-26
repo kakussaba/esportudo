@@ -64,6 +64,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
                 onPress={(team) => { navigate('Team', { team }) }}
                 onRefresh={onRefresh}
                 refreshing={refreshing}
+                hasError={hasError}
             />
             <Error error={error} hasError={hasError} />
         </S.Container>

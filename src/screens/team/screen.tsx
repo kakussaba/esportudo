@@ -65,6 +65,7 @@ export const TeamScreen: React.FC<TeamScreenProps> = ({ navigation, route }) => 
                 onPress={(team, player, color) => { navigate('Player', { team: team, player: player, color: color }) }}
                 refreshing={refreshing}
                 onRefresh={onRefresh}
+                hasError={hasError}
             />
            <Error error={error} hasError={hasError} />
         </>
