@@ -30,7 +30,7 @@ export const Routes: React.FC<{}> = () => {
                     ({ route }) => ({ 
                         title: route.params.team.name,
                         headerStyle: {
-                            backgroundColor: getMainColor(route.params?.team?.code).hex,
+                            backgroundColor: getMainColor(route.params?.team?.code)?.hex || colors.PRIMARY,
                         },
                         headerTintColor: colors.WHITE,
                     })
@@ -39,7 +39,7 @@ export const Routes: React.FC<{}> = () => {
                     ({ route }) => ({ 
                         title: route.params.player.firstname,
                         headerStyle: {
-                            backgroundColor: getMainColor(route.params?.team?.code).hex,
+                            backgroundColor: getMainColor(route.params?.team?.code)?.hex || colors.PRIMARY,
                         },
                         headerTintColor: colors.WHITE,
                     })
