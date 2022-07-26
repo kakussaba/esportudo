@@ -10,13 +10,16 @@ O projeto foi criado para apresentar um pouco do meu conhecimento sobre desenvol
 
 ## :rocket: Tecnologias Utilizadas
 
-- React-native
-- React Navigation
-- Styled Components
+- React-native;
+- React Navigation;
+- Styled Components;
+- Hooks;
+- Typescript;
+- Bottomsheet;
 
 ## :arrow_forward: Rodar o Projeto
 
-- Clone o projeto em sua maquina;
+- Clone o projeto em sua máquina;
 - Instale as dependências do package.json com "yarn install || npm i";
 - Rode na raiz do projeto apenas para ios "cd ios";
 - Rode na raiz do projeto apenas para ios "pod install";
