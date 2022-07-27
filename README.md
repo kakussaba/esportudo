@@ -29,7 +29,7 @@ O projeto foi criado para apresentar um pouco do meu conhecimento sobre desenvol
     ```
 - Instale as dependências do package.json:
     ```sh
-    $ yarn install || npm i
+    $ yarn install
     ```
 - Rode na raiz do projeto:
     ```sh
