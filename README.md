@@ -28,4 +28,4 @@ O projeto foi criado para apresentar um pouco do meu conhecimento sobre desenvol
 
 ---
 
-<h5 align='center' >Feito por Kananda Kussaba</h5>
+<h5 align='center'>Feito por Kananda Kussaba</h5>
